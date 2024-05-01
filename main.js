@@ -1,14 +1,18 @@
 const screen1 = document.querySelector(".screen1");
 const screen2 = document.querySelector(".screen2");
+const inputElement = document.querySelector('#inputNumber')
 
 let randomNumber = Math.round(Math.random() * 15);
 let xAtttempts = 1;
 
+// document.addEventListener("keydown", function(e) {
+//   console.log('Tecla = ', e)
+// })
+
 function tryAgain(event) {
   event.preventDefault(); //faz com que nao faça o padrão, enviar o formulário
-
   const inputNumber = document.querySelector("#inputNumber");
-
+  
   if (Number(inputNumber.value) == randomNumber) {
     toggleScreen()
     screen2.querySelector("h2").innerText = `Acertou em ${xAtttempts} Tentativas`;
@@ -36,6 +40,17 @@ function keyDown(e) {
     btnAgainClick()
   }
 }
+
+inputElement.addEventListener("keypress", function(e) {
+  if (e.key === 'Enter') {
+    if (inputElement.value === "") {
+      e.preventDefault()
+      alert("Por favor, digite um número entre 0 a 15")
+      tryAgain()
+    } 
+  }
+})
+
 
 //Eventos 
 const btnTry = document.querySelector("#btnTry");
